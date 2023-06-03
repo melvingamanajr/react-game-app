@@ -34,8 +34,8 @@ const QuizGame = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Add New Quiz Question</h1>
+    <div className="container" style={{ marginTop: '50px', maxWidth: '500px'}}>
+      <h1 style={{ marginBottom: '30px', textAlign: 'center', color: '#336699' }}>Add New Quiz Question</h1>
       <div className="form-group">
         <input
           type="text"
@@ -43,6 +43,7 @@ const QuizGame = () => {
           placeholder="Category"
           name="category"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px'}}
         />
       </div>
       <div className="form-group">
@@ -52,6 +53,7 @@ const QuizGame = () => {
           placeholder="Question"
           name="question"
           onChange={handleChange}
+          style={{ width: '100%' , margin: '5px'}}
         />
       </div>
       <div className="form-group">
@@ -61,6 +63,7 @@ const QuizGame = () => {
           placeholder="Option 1"
           name="option1"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px' }}
         />
       </div>
       <div className="form-group">
@@ -70,6 +73,7 @@ const QuizGame = () => {
           placeholder="Option 2"
           name="option2"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px' }}
         />
       </div>
       <div className="form-group">
@@ -79,6 +83,7 @@ const QuizGame = () => {
           placeholder="Option 3"
           name="option3"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px' }}
         />
       </div>
       <div className="form-group">
@@ -88,6 +93,7 @@ const QuizGame = () => {
           placeholder="Option 4"
           name="option4"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px' }}
         />
       </div>
       <div className="form-group">
@@ -97,12 +103,13 @@ const QuizGame = () => {
           placeholder="Correct Option"
           name="correctOption"
           onChange={handleChange}
+          style={{ width: '100%', margin: '5px' }}
         />
       </div>
-      <div className="btn-group">
-        <button className="btn btn-primary" style={{ backgroundColor: '#239023' }} onClick={handleClick}>Add</button>
+      <div className="btn-group" style={{ display: 'flex', justifyContent: 'center', margin: '5px' }}>
+        <button className="btn btn-primary" style={{ backgroundColor: '#336699', color: '#FFFFFF', marginRight: '10px', margin: '5px' }} onClick={handleClick}>Add</button>
         {error && <p className="text-danger">Something went wrong!</p>}
-        <Link className="btn btn-primary" style={{ backgroundColor: '#239023' }} to="/admin">Go Back</Link>
+        <Link className="btn btn-primary" style={{ backgroundColor: '#336699', margin: '5px' }} to="/admin">Go Back</Link>
       </div>
     </div>
   );

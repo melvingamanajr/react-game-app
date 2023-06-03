@@ -36,38 +36,36 @@ const SignupForm = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{ width: '300px', padding: '20px', border: '1px solid black' }}>
-        <h2>SIGNUP</h2>
+      <div style={{ width: '300px', padding: '20px', border: '1px solid #336699', backgroundColor: '#FFFFFF' }}>
+        <h2 style={{ color: '#336699', textAlign: 'center' }}>SIGNUP</h2>
         <form className="form" onSubmit={handleSubmit}>
           <input
-          style={{ margin: '5px' }}
             type="text"
             className="form-control"
             placeholder="Username"
             value={username}
             onChange={handleUsernameChange}
             required
+            style={{ marginBottom: '10px' }}
           />
           <input
-          style={{ margin: '5px' }}
             type="password"
             className="form-control"
             placeholder="Password"
             value={password}
             onChange={handlePasswordChange}
             required
+            style={{ marginBottom: '10px' }}
           />
           {token && <p>Authentication token: {token}</p>}
-          {error && <p>{error}</p>}
-          <div className="btn-group">
-            <button className="btn btn-primary" type="submit" style={{ backgroundColor: '#239023', margin: '5px' }}>
+          {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button className="btn btn-primary" type="submit" style={{ backgroundColor: '#336699', color: '#FFFFFF', marginRight: '10px' }}>
               SIGN UP
             </button>
-            <button className="btn btn-primary" style={{ backgroundColor: '#239023', marginLeft: '10px', margin: '5px' }}>
-              <Link to="/login" style={{ color: 'inherit', textDecoration: 'none', arginTop: '10px', padding: '5px'}}>
-                BACK
-              </Link>
-            </button>
+            <Link to="/login" style={{ color: '#336699', textDecoration: 'none' }}>
+              BACK
+            </Link>
           </div>
         </form>
       </div>
