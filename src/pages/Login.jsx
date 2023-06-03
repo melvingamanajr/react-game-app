@@ -24,16 +24,7 @@ const LoginForm = () => {
       .post('http://localhost:8800/api/login', { username, password })
       .then((response) => {
         console.log('Logged in successfully');
-
         setToken(response.data.token);
-
-        const { role } = response.data;
-
-        if (role === 'Admin') {
-          window.location = '/admin';
-        } else if (role === 'User') {
-          window.location = '/quiz';
-        }
       })
       .catch((error) => {
         console.error(error);

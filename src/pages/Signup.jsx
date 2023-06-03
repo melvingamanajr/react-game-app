@@ -26,7 +26,7 @@ const SignupForm = () => {
         console.log('Registered successfully');
 
         setToken(response.data.token);
-        window.location = '/';
+        window.location = '/login';
       })
       .catch((error) => {
         console.error(error);

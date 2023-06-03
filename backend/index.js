@@ -1,8 +1,11 @@
 import express from "express";
 import mysql from "mysql";
 import cors from "cors";
+import bcrypt from "bcrypt"
 
 const app = express();
+const saltRounds = 10;
+
 app.use(cors());
 app.use(express.json());
 
@@ -27,28 +30,18 @@ app.get("/api/questions", (req, res) => {
     return res.json(data);
   });
 });
-
+//username, password, role login
 app.post("/api/signup", (req, res) => {
-  const { username, password } = req.body;
+  const {username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required' });
-  }
-
-  const checkQuery = "SELECT * FROM login WHERE username = ?";
-  db.query(checkQuery, [username], (checkErr, checkResult) => {
-    if (checkErr) {
-      console.log(checkErr);
+  bcrypt.hash(password, saltRounds, (hashErr, hashedPassword) => {
+    if (hashErr) {
+      console.error(hashErr);
       return res.status(500).json({ error: 'Internal server error' });
     }
-
-    if (checkResult.length > 0  ) {
-      return res.status(400).json({ error: 'Username already exists' });
-    }
-
     const role = "User";
     const insertQuery = "INSERT INTO login (username, password, role) VALUES (?, ?, ?)";
-    db.query(insertQuery, [username, password, role], (insertErr, insertResult) => {
+    db.query(insertQuery, [username, hashedPassword, role], (insertErr, insertResult) => {
       if (insertErr) {
         console.log(insertErr);
         return res.status(500).json({ error: 'Internal server error' });
@@ -58,23 +51,27 @@ app.post("/api/signup", (req, res) => {
   });
 });
 
-
-app.post("/api/login", (req, res) => {
+app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  const query = "SELECT role FROM login WHERE username = ? AND password = ?";
-
-  db.query(query, [username, password], (err, data) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ error: "An error occurred while processing the login request." });
+  db.query('SELECT * FROM login WHERE username = ?', [username], (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } else if (results.length === 0) {
+      res.status(401).send('Invalid username or password');
+    } else {
+      const storedPassword = results[0].password;
+      bcrypt.compare(password, storedPassword, (compareErr, isMatch) => {
+        if (compareErr) {
+          console.error(compareErr);
+          res.status(500).send('Internal Server Error');
+        } else if (isMatch) {
+          res.sendStatus(200);
+        } else {
+          res.status(401).send('Oops! Something went wrong.');
+        }
+      });
     }
-
-    if (data.length === 0) {
-      return res.status(401).json({ error: "Invalid username or password." });
-    }
-    const role = data[0].role;
-
-    return res.json({ role });
   });
 });
 
