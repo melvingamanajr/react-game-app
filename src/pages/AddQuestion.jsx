@@ -35,7 +35,7 @@ const QuizGame = () => {
 
   return (
     <div className="container" style={{ marginTop: '50px', maxWidth: '500px'}}>
-      <h1 style={{ marginBottom: '30px', textAlign: 'center', color: '#336699' }}>Add New Quiz Question</h1>
+      <h1 style={{ marginBottom: '30px', textAlign: 'center', color: '#336699' }}>Add Quiz Question</h1>
       <div className="form-group">
         <input
           type="text"
