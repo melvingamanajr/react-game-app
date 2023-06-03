@@ -3,8 +3,6 @@ import axios from "axios";
 
 const QuizGame = () => {
   const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchAllQuestions = async () => {
@@ -18,53 +16,25 @@ const QuizGame = () => {
     fetchAllQuestions();
   }, []);
 
-  const handleAnswerClick = (isCorrect) => {
-    if (isCorrect) {
-      setScore((prevScore) => prevScore + 1);
-    }
-
-    if (currentQuestionIndex + 1 < questions.length) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    }
-  };
-
   return (
-    <div>
-      <h1>Quiz Game</h1>
-      {questions.length === 0 ? (
-        <div>Loading questions...</div>
-      ) : (
-        <div className="question">
-          <h2>{questions[currentQuestionIndex].question}</h2>
-          <p>Category: {questions[currentQuestionIndex].category}</p>
-          <ul>
-            {questions[currentQuestionIndex].options.map((option, index) => (
-              <li
-                key={index}
-                onClick={() => handleAnswerClick(option.isCorrect)}
-              >
-                {option.text}
-              </li>
-            ))}
-          </ul>
-          <p>Correct Option: {questions[currentQuestionIndex].correctOption}</p>
-        </div>
-      )}
-
-      {currentQuestionIndex + 1 < questions.length ? (
-        <button
-          onClick={() =>
-            setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
-          }
-        >
-          Next Question
-        </button>
-      ) : (
-        <div>
-          <p>Quiz completed!</p>
-          <p>Final Score: {score}</p>
-        </div>
-      )}
+    <div className="container">
+      <h1 className="text-center mt-4" style={{ color: "#1565c0" }}>Quiz Game</h1>
+      <div className="row">
+        {questions.length === 0 ? (
+          <div className="text-center" style={{ color: "#1565c0" }}>Loading questions...</div>
+        ) : (
+          questions.map((question) => (
+            <div key={question.id} className="col-md-6 col-lg-4">
+              <div className="card mb-3" style={{ backgroundColor: "#e3f2fd" }}>
+                <div className="card-body">
+                  <h5 className="card-title" style={{ color: "#1565c0" }}>{question.question}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">Category: {question.category}</h6>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

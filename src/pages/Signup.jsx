@@ -35,7 +35,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
       <div style={{ width: '300px', padding: '20px', border: '1px solid #336699', backgroundColor: '#FFFFFF' }}>
         <h2 style={{ color: '#336699', textAlign: 'center' }}>SIGNUP</h2>
         <form className="form" onSubmit={handleSubmit}>
@@ -64,7 +64,9 @@ const SignupForm = () => {
               SIGN UP
             </button>
             <Link to="/login" style={{ color: '#336699', textDecoration: 'none' }}>
-              BACK
+            <button className="btn btn-primary" style={{ backgroundColor: '#336699', color: '#FFFFFF', marginRight: '10px' }}>
+              Back
+            </button>
             </Link>
           </div>
         </form>
