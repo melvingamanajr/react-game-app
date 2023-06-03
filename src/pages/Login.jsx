@@ -37,39 +37,43 @@ const LoginForm = () => {
       })
       .catch((error) => {
         console.error(error);
-        setError('Invalid username or password.');
+        setError('Oops! Something went wrong');
       });
   };
 
   return (
-    <div>
-      <h2>LOGIN</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Username"
-          value={username}
-          onChange={handleUsernameChange}
-          required
-        />
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-        {token && <p>Authentication token: {token}</p>}
-        {error && <p>{error}</p>}
-        <div className="btn-group">
-          <button className="btn btn-primary" type="submit" style={{ backgroundColor: '#239023' }}>
-            LOGIN
-          </button>
-        </div>
-      </form>
-      <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ width: '300px', padding: '20px', border: '1px solid black' }}>
+        <h2>LOGIN</h2>
+        <form className="form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            value={username}
+            onChange={handleUsernameChange}
+            required
+          />
+          <input
+          style={{ marginTop: '10px' }}
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+          {token && <p>Authentication token: {token}</p>}
+          <div className="btn-group" style={{ marginTop: '10px' }}>
+            <button className="btn btn-primary" type="submit" style={{ backgroundColor: '#239023' }}>
+              LOGIN
+            </button>
+            
+          </div>
+          {error && <p>{error}</p>}
+        </form>
+        <p style={{ marginTop: '10px', padding: '5px' }}>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+      </div>
     </div>
   );
 };
